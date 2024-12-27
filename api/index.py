@@ -3,8 +3,8 @@ from pyproj import transform
 
 app = FastAPI()
 
-@app.get("/api/")
-async def basisverzeichnis():
+@app.get("/api/base")
+async def base():
     return {"status": "alles gut, es funktioniert Version 2"}
 
 @app.get("/api/wgs84lv95")
