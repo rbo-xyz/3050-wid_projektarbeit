@@ -1,29 +1,20 @@
 from fastapi import FastAPI
 import pandas as pd
 import os
-from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 app = FastAPI()
 
 # --------------------------------------------------------------------------------------------------------- #
 # IMPORT aller JSON-DATEN in ein Pandas Dataframe
 base_path = os.path.join(os.path.dirname(__file__), "data")
-anzahl_daten = 10
+anzahl_daten = 4
 all_df = []
 list_df =[]
 
 for jahr in range(anzahl_daten):
-    year = 2015 + jahr
+    year = 2021 + jahr
     file_name = f"new_meteodaten_daily_{year}.json"
     file_path = os.path.join(base_path, file_name)
 

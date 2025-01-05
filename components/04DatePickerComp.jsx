@@ -22,7 +22,7 @@ export const DatePickerComp = ({ date, onDateChange }) => {
         value={dayjs(date)}
         // onChange={(newValue) => setDate(newValue)}
         onChange={handleChange}
-        minDate={dayjs("2015-01-01")} // Frühestes Datum: 1. Januar 2000
+        minDate={dayjs("2021-01-01")} // Frühestes Datum: 1. Januar 2000
         maxDate={dayjs("2024-12-31")} // Spätestes Datum: 31. Dezember 2030
         renderInput={(params) => <TextField {...params} />}
       />

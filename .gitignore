@@ -41,3 +41,4 @@ venv
 # Eigener Git-Ignore
 data_transform_rbo/
 test_rbo/
+_other_rbo/

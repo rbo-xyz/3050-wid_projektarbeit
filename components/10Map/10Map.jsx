@@ -58,10 +58,10 @@ function Map({ date }) {
   // Fetch
   useEffect(() => {
     const url = `api/date?time_str=${date}`;
-    fetchQuakeData(url);
+    fetchMeteoData(url);
   }, [date]);
 
-  async function fetchQuakeData(url) {
+  async function fetchMeteoData(url) {
     try {
       const resp = await fetch(url);
       if (!resp.ok) {
@@ -91,6 +91,7 @@ function Map({ date }) {
       };
 
       setMeteoJSON(MeteoGEOJSON);
+      console.log(meteoArray);
     } catch (error) {
       console.log(error);
     }
