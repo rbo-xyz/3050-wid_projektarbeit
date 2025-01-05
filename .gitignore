@@ -37,3 +37,7 @@ next-env.d.ts
 # python
 __pycache__/
 venv
+
+# Eigener Git-Ignore
+data_transform_rbo/
+test_rbo/
