@@ -91,7 +91,6 @@ function Map({ date }) {
       };
 
       setMeteoJSON(MeteoGEOJSON);
-      console.log(meteoArray);
     } catch (error) {
       console.log(error);
     }

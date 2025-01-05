@@ -10,6 +10,8 @@ import { Header } from "../components/01Header";
 import { ToTheTop } from "../components/02ToTheTop";
 import { ButtonComp } from "../components/03ButtonComp";
 import { DatePickerComp } from "../components/04DatePickerComp";
+import { DropdownComp } from "../components/05DropdownComp";
+import { VisComp } from "../components/06VisComp";
 
 const Map = dynamic(() => import("../components/10Map/10Map"), { ssr: false });
 
@@ -31,8 +33,41 @@ export default function App() {
   };
 
   //
-  // useStates Datumspicker Map
+  // useStates DatumPicker Map
   const [dateMap, setDateMap] = useState("2021-01-01");
+
+  //
+  // Für Visualisierung
+  const dateList = [
+    { 2021: "2021" },
+    { 2022: "2022" },
+    { 2023: "2023" },
+    { 2024: "2024" },
+  ];
+
+  const dataList = [{ RainDur: "Regendauer" }, { T_max_h1: "Temperatur" }];
+
+  const StaoList = [
+    { Zch_Stampfenbachstrasse: "Zürich Stampfenbachstrasse" },
+    { Zch_Schimmelstrasse: "Zürich Schimmelstrasse" },
+    { Zch_Rosengartenstrasse: "Zürich Rosengartenstrasse" },
+  ];
+
+  const [selectedDate, setSelectedDate] = useState(2021);
+  const [selectedData, setSelectedData] = useState("T_max_h1");
+  const [selectedStao, setSelectedStao] = useState("Zch_Stampfenbachstrasse");
+
+  const selectedDateFunction = (event) => {
+    setSelectedDate(event.target.value);
+  };
+
+  const selectedDataFunction = (event) => {
+    setSelectedData(event.target.value);
+  };
+
+  const selectedStaoFuntion = (event) => {
+    setSelectedStao(event.target.value);
+  };
 
   return (
     <div className="App">
@@ -85,10 +120,40 @@ export default function App() {
           <Map date={dateMap} />
         </div>
         <div ref={targetDiv3} className="divFullscreen div3">
-          Div 3
+          <div className="VisTitelContainer">
+            <div id="VisTitelSubcontainer">Titel</div>
+            <div id="VisDropdownSubcontainer">
+              <DropdownComp
+                label="Datum"
+                list={dateList}
+                selectedItemFunction={selectedDateFunction}
+              />
+              <DropdownComp
+                label="Darstellungsdaten"
+                list={dataList}
+                selectedItemFunction={selectedDataFunction}
+              />
+              <DropdownComp
+                label="Standort"
+                list={StaoList}
+                selectedItemFunction={selectedStaoFuntion}
+              />
+            </div>
+          </div>
+          <div className="VisContainer">
+            <VisComp
+              date={selectedDate}
+              data={selectedData}
+              stao={selectedStao}
+            />
+          </div>
         </div>
         <div ref={targetDiv4} className="divFullscreen div4">
-          Div 4
+          <div className="PreTitelContainer">
+            <div id="PreTitelSubcontainer">Titel</div>
+            <div id="PreSelectorSubcontainer"></div>
+          </div>
+          <div className="PreContainer">Prediction Result</div>
         </div>
       </div>
     </div>

@@ -36,11 +36,11 @@ body {
 }
 
 .div3 {
-  background-color: lightcoral;
+  /* background-color: lightcoral; */
 }
 
 .div4 {
-  background-color: lightgoldenrodyellow;
+  /* background-color: lightgoldenrodyellow; */
   height: calc(100vh);
 }
 
@@ -69,5 +69,56 @@ body {
 
 #mapPickerSubcontainer {
   width: 30%;
+  align-self: center;
+}
+
+/* Styles für das Vis-Div */
+.VisTitelContainer {
+  height: 35vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+.VisContainer {
+  height: 65vh;
+  align-content: center;
+}
+
+#VisTitelSubcontainer {
+  width: 60%;
+  align-self: center;
+  text-align: left;
+  margin-left: 15px;
+}
+
+#VisDropdownSubcontainer {
+  width: 40%;
+  align-self: center;
+}
+
+/* Styles für das Pre-Div */
+.PreTitelContainer {
+  height: 30vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+.PreContainer {
+  height: 70vh;
+}
+
+#PreTitelSubcontainer {
+  width: 60%;
+  align-self: center;
+  text-align: left;
+  margin-left: 15px;
+}
+
+#PreSelectorSubcontainer {
+  width: 40%;
   align-self: center;
 }
