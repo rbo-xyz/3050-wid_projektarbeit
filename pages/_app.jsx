@@ -3,6 +3,7 @@ import "./App.css";
 import { useRef, useState } from "react";
 import { Typography } from "@mui/material";
 import dynamic from "next/dynamic";
+import dayjs from "dayjs";
 
 import "leaflet/dist/leaflet.css";
 
@@ -12,6 +13,7 @@ import { ButtonComp } from "../components/03ButtonComp";
 import { DatePickerComp } from "../components/04DatePickerComp";
 import { DropdownComp } from "../components/05DropdownComp";
 import { VisComp } from "../components/06VisComp";
+import { PreComp } from "../components/07PreComp";
 
 const Map = dynamic(() => import("../components/10Map/10Map"), { ssr: false });
 
@@ -35,6 +37,8 @@ export default function App() {
   //
   // useStates DatumPicker Map
   const [dateMap, setDateMap] = useState("2021-01-01");
+  const dateRangeMapMin = dayjs("2021-01-01");
+  const dateRangeMapMax = dayjs("2024-12-31");
 
   //
   // Für Visualisierung
@@ -68,6 +72,12 @@ export default function App() {
   const selectedStaoFuntion = (event) => {
     setSelectedStao(event.target.value);
   };
+
+  //
+  // useStates DatumPicker Prediciton
+  const [datePre, setDatePre] = useState("2025-01-01");
+  const dateRangePreMin = dayjs("2025-01-01");
+  const dateRangePreMax = dayjs("2030-12-31");
 
   return (
     <div className="App">
@@ -107,21 +117,32 @@ export default function App() {
         <div ref={targetDiv2} className="divFullscreen div2">
           <div className="mapPickerContainer">
             <div id="mapTextSubcontainer">
-              <Typography variant="h6">Meteo Karte</Typography>
+              <Typography variant="h6">Meteo-Karte</Typography>
               <Typography variant="body1">
                 Mithilfe der Wahl eines Datums rechts können auf der Karte unten
                 die Daten von diesem Tag eingesehen werden.
               </Typography>
             </div>
             <div id="mapPickerSubcontainer">
-              <DatePickerComp date={dateMap} onDateChange={setDateMap} />
+              <DatePickerComp
+                date={dateMap}
+                onDateChange={setDateMap}
+                minRange={dateRangeMapMin}
+                maxRange={dateRangeMapMax}
+              />
             </div>
           </div>
           <Map date={dateMap} />
         </div>
         <div ref={targetDiv3} className="divFullscreen div3">
           <div className="VisTitelContainer">
-            <div id="VisTitelSubcontainer">Titel</div>
+            <div id="VisTitelSubcontainer">
+              <Typography variant="h6">Meteo-Diagramm</Typography>
+              <Typography variant="body1">
+                Mithilfe der Wahl der einzelnen Komponenten rechts kann unten
+                ein Diagramm generiert werden, welche die Daten visualisiert.
+              </Typography>
+            </div>
             <div id="VisDropdownSubcontainer">
               <DropdownComp
                 label="Datum"
@@ -150,10 +171,26 @@ export default function App() {
         </div>
         <div ref={targetDiv4} className="divFullscreen div4">
           <div className="PreTitelContainer">
-            <div id="PreTitelSubcontainer">Titel</div>
-            <div id="PreSelectorSubcontainer"></div>
+            <div id="PreTitelSubcontainer">
+              {" "}
+              <Typography variant="h6">Temperatur-Vorhersage</Typography>
+              <Typography variant="body1">
+                Mithilfe der Wahl eines Datums rechts wird unten eine Vorhersage
+                für eine mögliche Höchsttemperatur an diesem Tag gemacht
+              </Typography>
+            </div>
+            <div id="PreSelectorSubcontainer">
+              <DatePickerComp
+                date={datePre}
+                onDateChange={setDatePre}
+                minRange={dateRangePreMin}
+                maxRange={dateRangePreMax}
+              />
+            </div>
           </div>
-          <div className="PreContainer">Prediction Result</div>
+          <div className="PreContainer">
+            <PreComp time={datePre} />
+          </div>
         </div>
       </div>
     </div>

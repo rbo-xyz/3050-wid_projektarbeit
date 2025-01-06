@@ -4,6 +4,7 @@ import os
 import json
 from datetime import datetime, timezone
 import altair as alt
+import math
 
 alt.data_transformers.enable("vegafusion")
 
@@ -97,53 +98,79 @@ async def date(time_str: str):
 
 # --------------------------------------------------------------------------------------------------------- #
 # API für Heatmap-Spezifikationen
-# @app.get("/api/vis")
-# async def vis(data: str, time: int, stao: str):
-#     try:
+@app.get("/api/vis")
+async def vis(data: str, time: int, stao: str):
+    try:
 
-#         filtered_data = [d for d in all_data if d["Standort"] == stao and int(datetime.fromtimestamp( d["Datum"]/ 1000).year) == time]
+        filtered_data = [d for d in all_data if d["Standort"] == stao and int(datetime.fromtimestamp( d["Datum"]/ 1000).year) == time]
 
-#         if len(filtered_data) == 0:
-#             return {"Status": "Keine Daten vorhanden"}
+        if len(filtered_data) == 0:
+            return {"Status": "Keine Daten vorhanden"}
 
-#         for d in filtered_data:
-#             date_obj = datetime.fromtimestamp(d["Datum"] / 1000)
-#             d["Tag"] = date_obj.day
-#             d["Monat"] = date_obj.strftime('%b')
+        for d in filtered_data:
+            date_obj = datetime.fromtimestamp(d["Datum"] / 1000)
+            d["Tag"] = date_obj.day
+            d["Monat"] = date_obj.strftime('%b')
 
-#         stao_komp = []
-#         for d in filtered_data:
-#             stao_komp.append(d["Standortname"])
+        stao_komp = []
+        for d in filtered_data:
+            stao_komp.append(d["Standortname"])
 
-#         stao_einz = stao_komp[0]
+        stao_einz = stao_komp[0]
 
-#         color_scale = (
-#             alt.Scale(domain=[-20, -10, 0, 10, 20, 30, 40], range=["blue", "lightblue", "white", "pink", "lightred", "red", "darkred"])
-#             if data == "T_max_h1"
-#             else alt.Scale(domain=[0, 100, 200, 300, 400, 500], range=["white", "lightblue", "blue", "darkblue", "navy", "black"])
-#         )
+        color_scale = (
+            alt.Scale(domain=[-20, -10, 0, 10, 20, 30, 40], range=["blue", "lightblue", "white", "pink", "lightred", "red", "darkred"])
+            if data == "T_max_h1"
+            else alt.Scale(domain=[0, 100, 200, 300, 400, 500], range=["white", "lightblue", "blue", "darkblue", "navy", "black"])
+        )
 
-#         month_order = ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dez"]
+        month_order = ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dez"]
 
-#         chart = (
-#             alt.Chart(alt.Data(values=filtered_data))
-#             .mark_rect()
-#             .encode(
-#                 x=alt.X("Tag:O", title="Tag"),
-#                 y=alt.Y("Monat:O", title="Monat", sort=month_order),
-#                 color=alt.Color(f"{data}:Q", scale=color_scale, title="Wert"),
-#                 tooltip=["Datum:T", f"{data}:Q"],
-#             )
-#             .properties(
-#                 title=f"Tägliche {'Temperaturen' if data == 'T' else 'Regenmengen'} in {stao_einz} ({time})",
-#                 width=600,
-#                 height=300,
-#             )
-#         )
+        chart = (
+            alt.Chart(alt.Data(values=filtered_data))
+            .mark_rect()
+            .encode(
+                x=alt.X("Tag:O", title="Tag"),
+                y=alt.Y("Monat:O", title="Monat", sort=month_order),
+                color=alt.Color(f"{data}:Q", scale=color_scale, title="Wert"),
+                tooltip=["Datum:T", f"{data}:Q"],
+            )
+            .properties(
+                title=f"Tägliche {'Temperaturen' if data == 'T' else 'Regenmengen'} in {stao_einz} ({time})",
+                width=600,
+                height=300,
+            )
+        )
         
-#         return chart.to_dict(format="vega")
+        return chart.to_dict(format="vega")
 
-#     except Exception as e:
-#         return {"Status Fehler": str(e)}
+    except Exception as e:
+        return {"Status Fehler": str(e)}
 
 # Beispielabfrage: http://localhost:8000/api/vis?data=T&time=2021&stao=Zch_Stampfenbachstrasse
+
+# --------------------------------------------------------------------------------------------------------- #
+# API für Prediction
+@app.get("/api/pre")
+async def pre(time_str:str):
+    try:
+
+        time1 = datetime.fromisoformat(time_str).replace(tzinfo=timezone.utc)
+        time_unix_ms = int(time1.timestamp() * 1000)
+
+        start = 1609459200000
+        time4 = (time_unix_ms - start) / 1000
+        time5 = int((time4 / (60 * 60 * 24))+1)
+
+        temp_pre = 0.0001 * time5 + 10.56 * math.sin(0.017453 * time5 + (-2.44)) + 15.56
+
+        date = datetime.utcfromtimestamp( time_unix_ms/ 1000).strftime("%Y-%m-%d")
+
+        return {"Tag (Tageszahl ab Start)": time5,
+                "Datum" : date,
+                "Vorhergesagte Temperatur (°C)": round(temp_pre, 2)}
+
+    except Exception as e:
+        return {"Status Fehler": str(e)}
+
+# Beispielabfrage: http://localhost:8000/api/pre?time_str=2024-01-01

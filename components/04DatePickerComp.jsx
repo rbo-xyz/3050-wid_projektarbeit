@@ -7,7 +7,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import "dayjs/locale/de";
 import dayjs from "dayjs";
 
-export const DatePickerComp = ({ date, onDateChange }) => {
+export const DatePickerComp = ({ date, onDateChange, minRange, maxRange }) => {
   const handleChange = (newDate) => {
     const formattedDate = dayjs(newDate).format("YYYY-MM-DD");
     onDateChange(formattedDate);
@@ -22,8 +22,8 @@ export const DatePickerComp = ({ date, onDateChange }) => {
         value={dayjs(date)}
         // onChange={(newValue) => setDate(newValue)}
         onChange={handleChange}
-        minDate={dayjs("2021-01-01")} // Frühestes Datum: 1. Januar 2000
-        maxDate={dayjs("2024-12-31")} // Spätestes Datum: 31. Dezember 2030
+        minDate={minRange}
+        maxDate={maxRange}
         renderInput={(params) => <TextField {...params} />}
       />
     </LocalizationProvider>

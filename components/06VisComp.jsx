@@ -26,7 +26,7 @@ export const VisComp = ({ date, data, stao }) => {
 
   return (
     <div>
-      <VegaLite spec={vegaSpec} />
+      {vegaSpec ? <VegaLite spec={vegaSpec} /> : <p>Lade das Diagramm...</p>}
     </div>
   );
 };

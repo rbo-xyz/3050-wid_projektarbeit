@@ -100,7 +100,7 @@ body {
 
 /* Styles für das Pre-Div */
 .PreTitelContainer {
-  height: 30vh;
+  height: 15vh;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -108,7 +108,7 @@ body {
 }
 
 .PreContainer {
-  height: 70vh;
+  height: 85vh;
 }
 
 #PreTitelSubcontainer {
