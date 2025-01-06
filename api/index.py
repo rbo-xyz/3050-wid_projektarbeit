@@ -1,9 +1,9 @@
 from fastapi import FastAPI
-# import pandas as pd
+import altair as alt
+
 import os
 import json
 from datetime import datetime, timezone
-import altair as alt
 import math
 
 alt.data_transformers.enable("vegafusion")

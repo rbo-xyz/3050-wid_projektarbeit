@@ -3,8 +3,8 @@
 import { renderToString } from "react-dom/server";
 import { CssBaseline, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import L from "leaflet";
 import { MapContainer, TileLayer, GeoJSON, LayersControl } from "react-leaflet";
+import L from "leaflet";
 
 import { BASE_LAYERS } from "./baseLayers";
 

@@ -1,11 +1,10 @@
 import "./App.css";
+import "leaflet/dist/leaflet.css";
 
 import { useRef, useState } from "react";
 import { Typography } from "@mui/material";
 import dynamic from "next/dynamic";
 import dayjs from "dayjs";
-
-import "leaflet/dist/leaflet.css";
 
 import { Header } from "../components/01Header";
 import { ToTheTop } from "../components/02ToTheTop";
@@ -14,7 +13,6 @@ import { DatePickerComp } from "../components/04DatePickerComp";
 import { DropdownComp } from "../components/05DropdownComp";
 import { VisComp } from "../components/06VisComp";
 import { PreComp } from "../components/07PreComp";
-
 const Map = dynamic(() => import("../components/10Map/10Map"), { ssr: false });
 
 export default function App() {

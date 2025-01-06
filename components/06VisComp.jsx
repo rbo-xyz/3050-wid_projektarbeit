@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { VegaLite } from "react-vega";
 
 export const VisComp = ({ date, data, stao }) => {

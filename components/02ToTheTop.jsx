@@ -1,6 +1,5 @@
 // Vorlage von https://mui.com/material-ui/react-app-bar/
 
-import React from "react";
 import { Fab } from "@mui/material";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
