@@ -1,12 +1,12 @@
 from fastapi import FastAPI
-import altair as alt
+from altair import Chart, Data, X, Y, Color, Scale, data_transformers
 
 import os
 import json
 from datetime import datetime, timezone
-import math
+from math import sin
 
-alt.data_transformers.enable("vegafusion")
+data_transformers.enable("vegafusion")
 
 
 app = FastAPI()
@@ -119,20 +119,20 @@ async def vis(data: str, time: int, stao: str):
         stao_einz = stao_komp[0]
 
         color_scale = (
-            alt.Scale(domain=[-20, -10, 0, 10, 20, 30, 40], range=["blue", "lightblue", "white", "pink", "lightred", "red", "darkred"])
+            Scale(domain=[-20, -10, 0, 10, 20, 30, 40], range=["blue", "lightblue", "white", "pink", "lightred", "red", "darkred"])
             if data == "T_max_h1"
-            else alt.Scale(domain=[0, 100, 200, 300, 400, 500], range=["white", "lightblue", "blue", "darkblue", "navy", "black"])
+            else Scale(domain=[0, 100, 200, 300, 400, 500], range=["white", "lightblue", "blue", "darkblue", "navy", "black"])
         )
 
         month_order = ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dez"]
 
         chart = (
-            alt.Chart(alt.Data(values=filtered_data))
+            Chart(Data(values=filtered_data))
             .mark_rect()
             .encode(
-                x=alt.X("Tag:O", title="Tag"),
-                y=alt.Y("Monat:O", title="Monat", sort=month_order),
-                color=alt.Color(f"{data}:Q", scale=color_scale, title="Wert"),
+                x=X("Tag:O", title="Tag"),
+                y=Y("Monat:O", title="Monat", sort=month_order),
+                color=Color(f"{data}:Q", scale=color_scale, title="Wert"),
                 tooltip=["Datum:T", f"{data}:Q"],
             )
             .properties(
@@ -162,7 +162,7 @@ async def pre(time_str:str):
         time4 = (time_unix_ms - start) / 1000
         time5 = int((time4 / (60 * 60 * 24))+1)
 
-        temp_pre = 0.0001 * time5 + 10.56 * math.sin(0.017453 * time5 + (-2.44)) + 15.56
+        temp_pre = 0.0001 * time5 + 10.56 * sin(0.017453 * time5 + (-2.44)) + 15.56
 
         date = datetime.utcfromtimestamp( time_unix_ms/ 1000).strftime("%Y-%m-%d")
 
