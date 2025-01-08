@@ -55,9 +55,9 @@ export default function App() {
     { Zch_Rosengartenstrasse: "Zürich Rosengartenstrasse" },
   ];
 
-  const [selectedDate, setSelectedDate] = useState(2021);
-  const [selectedData, setSelectedData] = useState("T_max_h1");
-  const [selectedStao, setSelectedStao] = useState("Zch_Stampfenbachstrasse");
+  const [selectedDate, setSelectedDate] = useState();
+  const [selectedData, setSelectedData] = useState();
+  const [selectedStao, setSelectedStao] = useState();
 
   const selectedDateFunction = (event) => {
     setSelectedDate(event.target.value);
