@@ -34,13 +34,19 @@ export default function App() {
 
   //
   // useStates DatumPicker Map
-  const [dateMap, setDateMap] = useState("2021-01-01");
-  const dateRangeMapMin = dayjs("2021-01-01");
+  const [dateMap, setDateMap] = useState("2025-01-01");
+  const dateRangeMapMin = dayjs("2025-01-01");
   const dateRangeMapMax = dayjs("2024-12-31");
 
   //
   // Für Visualisierung
   const dateList = [
+    { 2015: "2015" },
+    { 2016: "2016" },
+    { 2017: "2017" },
+    { 2018: "2018" },
+    { 2019: "2019" },
+    { 2020: "2020" },
     { 2021: "2021" },
     { 2022: "2022" },
     { 2023: "2023" },

@@ -38,8 +38,8 @@ app = FastAPI()
 # IMPORT aller JSON-DATEN (alternative)
 
 base_path = os.path.join(os.path.dirname(__file__), "data")
-anzahl_daten = 4
-first_jahr = 2021
+anzahl_daten = 10
+first_jahr = 2015
 all_data = []
 
 for jahr in range(anzahl_daten):
@@ -136,7 +136,7 @@ async def vis(data: str, time: int, stao: str):
                 tooltip=["Datum:T", f"{data}:Q"],
             )
             .properties(
-                title=f"Tägliche {'Temperaturen' if data == 'T' else 'Regenmengen'} in {stao_einz} ({time})",
+                title=f"Tägliche {"Temperaturen" if data == "T_max_h1" else "Regenmengen"} in {stao_einz} ({time})",
                 width=600,
                 height=300,
             )
@@ -158,7 +158,7 @@ async def pre(time_str:str):
         time1 = datetime.fromisoformat(time_str).replace(tzinfo=timezone.utc)
         time_unix_ms = int(time1.timestamp() * 1000)
 
-        start = 1609459200000
+        start = 1420070400000
         time4 = (time_unix_ms - start) / 1000
         time5 = int((time4 / (60 * 60 * 24))+1)
 
