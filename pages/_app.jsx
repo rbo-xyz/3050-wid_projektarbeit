@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import { Typography } from "@mui/material";
 import dynamic from "next/dynamic";
 import dayjs from "dayjs";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 import { Header } from "../components/01Header";
 import { ToTheTop } from "../components/02ToTheTop";
@@ -117,6 +118,18 @@ export default function App() {
               beschriftung={"Vorhersage"}
             />
           </div>
+          <div>
+            <Typography variant="body1">
+              Hinweis: <br />
+              Mit dem Button unten Rechts (
+              <span id="iconContainer">
+                <KeyboardArrowUpIcon />
+              </span>
+              ) kann nach Auswahl der Integrationen auf diese Titelseite
+              zurückgekehrt werden. <br />
+              Das Scrollen auf der Webseite ist im allgemeinen deaktiviert.
+            </Typography>
+          </div>
         </div>
         <div ref={targetDiv2} className="divFullscreen div2">
           <div className="mapPickerContainer">
@@ -143,8 +156,18 @@ export default function App() {
             <div id="VisTitelSubcontainer">
               <Typography variant="h6">Meteo-Diagramm</Typography>
               <Typography variant="body1">
-                Mithilfe der Wahl der einzelnen Komponenten rechts kann unten
-                ein Diagramm generiert werden, welche die Daten visualisiert.
+                Mithilfe der Wahl der einzelnen Details rechts kann unten ein
+                Diagramm generiert werden, welche die Daten visualisiert.
+                Mithilfe der Maus können im Diagramm weitere Informationen
+                gefunden werden.
+                <br />
+                Das Laden des Diagrammes ist rechenaufwändig. Daher bitte ich um
+                entschuldigung für die lange Ladezeit.
+              </Typography>
+              <hr />
+              <Typography variant="body1">
+                Hinweis: Die Visualisierung wird nur angezeigt, wenn alle
+                Details selektiert wurden.
               </Typography>
             </div>
             <div id="VisDropdownSubcontainer">
@@ -176,7 +199,6 @@ export default function App() {
         <div ref={targetDiv4} className="divFullscreen div4">
           <div className="PreTitelContainer">
             <div id="PreTitelSubcontainer">
-              {" "}
               <Typography variant="h6">Temperatur-Vorhersage</Typography>
               <Typography variant="body1">
                 Mithilfe der Wahl eines Datums rechts wird unten eine Vorhersage

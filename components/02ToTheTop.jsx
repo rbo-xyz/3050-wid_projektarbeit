@@ -10,7 +10,7 @@ export const ToTheTop = () => {
 
   return (
     <Fab
-      color="rgb(208, 208, 208)"
+      color="rgb(150, 150, 150)"
       size="medium"
       onClick={scrollToTop}
       style={{

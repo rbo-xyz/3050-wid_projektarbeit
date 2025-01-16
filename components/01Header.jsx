@@ -14,7 +14,7 @@ export const Header = () => {
           minHeight: "75px",
           display: "flex",
           justifyContent: "center",
-          backgroundColor: "rgb(208, 208, 208)",
+          backgroundColor: "rgb(170, 170, 170)",
         }}
       >
         <Toolbar>

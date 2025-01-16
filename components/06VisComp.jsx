@@ -7,8 +7,10 @@ export const VisComp = ({ date, data, stao }) => {
   //
   // Fetch
   useEffect(() => {
-    const url = `api/vis?data=${data}&time=${date}&stao=${stao}`;
-    fetchVegaData(url);
+    if (date && data && stao) {
+      const url = `api/vis?data=${data}&time=${date}&stao=${stao}`;
+      fetchVegaData(url);
+    }
   }, [date, data, stao]);
 
   async function fetchVegaData(url) {
