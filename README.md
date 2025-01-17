@@ -10,29 +10,13 @@
 
    Alternativ kann auch mithilfe des Github-Desktop das Repository geklont werden
 
-2. benötigte Programme:
+2. Installation der benötigten Software:
 
-   - node.js
-   - anaconda
-   - VSCode
+- Microsoft Visuel Studio Code
+- Anaconda Distribution
+- Node.js
 
-### Frontend-Server
-
-1. `node.js`-Module installieren:
-
-   ```
-   npm install
-   ```
-
-2. Webserver starten
-
-   ```
-   npm run dev
-   ```
-
-3. Auf den angezeigten localhost-Link klicken und die Webseite öffnen
-
-### API (falls die API nicht mit dem Forntend automatisch gestartet wird)
+### Setting Up Anaconda-Enviroment
 
 1. Erstellung eines Anaconda-Enviorment
 
@@ -48,18 +32,58 @@
 
    Die Benötigten Module sind in requirements.txt gespeichert
 
-3. API-Server starten:
+3. Projektordner im VS-Code öffnen.
 
-   In der anaconda-Promt mit `cd <pfad>/api` in den Ordner der API navigieren `(./api)`
+4. `index.py` öffnen im Ordner `api`
 
-   Anschliesen erstelltes Enviorment aktivieren
+5. Im Suchfenster oben `> Python: Select Interpretter` eigeben und die Funktion auswählen.
+
+6. Erstelltes Python-Enviroment auswählen (gemäss unterem Screenshot)
+
+   ![](/public/01_pythonInterpreter.png)
+
+### Starten der Applikation
+
+1. Projektordner im VS-Code öffnen und Terminal öffnen
+
+2. `node.js`-Module installieren:
 
    ```
-   conda activate 3050WID_project_py312
+   npm install
    ```
 
-   Server starten
+3. Webserver starten
 
    ```
-   fastapi dev index.py
+   npm run dev
    ```
+
+4. Öfnnen der Appliaktion
+
+   Die API sollte mit dem forntend Automatisch starten.
+
+   <http://localhost:3000/>
+
+## Webseite
+
+Die Appliaktion ist als Projektarbeit für das Modul 3050 WID für den BSc in Geomatik erstellt wurde. Die dazugehörigen Reflexionsfragen sind auf Moodle abgeben worden.
+
+Nachfolgen sind Bilder der Appliaktion beigelegt.
+
+### Titelseite
+
+![](/public/02_titelseite.png)
+
+### Kartendarstellung
+
+![](/public/03_karte.png)
+
+### Visualisierung
+
+![](/public/04a_Vis.png)
+
+![](/public/04b_Vis.png)
+
+### Vorhersage
+
+![](/public/05_Pre.png)
